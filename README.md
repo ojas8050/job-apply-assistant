@@ -211,8 +211,8 @@ Expected: only the example paths in this README. Never add `profile.md`, `prefer
 `applications.csv`, `queue.md`, resumes or cover letters (see `.gitignore`).
 
 Ways to publish:
-- **GitHub repo:** put this folder at the repo root (or under `skills/job-apply-assistant/`), add
-  a `LICENSE` of your choice, push. Users copy the folder into `~/.claude/skills/`.
+- **GitHub repo:** put this folder at the repo root (or under `skills/job-apply-assistant/`), the
+  `LICENSE` file (MIT) is already included; push. Users copy the folder into `~/.claude/skills/`.
 - **Claude Code plugin:** wrap it with a `.claude-plugin/plugin.json` and a
   `skills/job-apply-assistant/` directory, then list it in a plugin marketplace repo.
 - **Zip:** `zip -r job-apply-assistant.zip job-apply-assistant -x '*.DS_Store'`.
@@ -242,3 +242,9 @@ scripts/build_resume.sh          markdown -> docx -> pdf (pandoc; Word or LibreO
 scripts/tailor.py                reorder/reword a base resume, then build
 examples/                        made-up sample files
 ```
+
+## 13. License
+
+MIT. See `LICENSE`. The skill is provided as is, without warranty: you are responsible for what is
+submitted in your name on job boards. Please review each application, and use the dry-run mode
+first.
