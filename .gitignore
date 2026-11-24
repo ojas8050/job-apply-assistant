@@ -1,0 +1,14 @@
+# Personal files must never live in the skill folder
+profile.md
+preferences.md
+applications.csv
+pipeline.csv
+queue.md
+postings/
+tailored/
+interviews/
+followups/
+reviews/
+*.pdf
+*.docx
+.DS_Store
