@@ -1,3 +1,5 @@
+> **Built on Claude.** This skill is made for Claude (Claude Code), and it may not work the same in other AI agents like Cursor, Gemini or ChatGPT. You can still try it there: start with the chat-mode prompt in [`portable/`](portable/README.md).
+
 <p align="center">
   <img src="docs/banner.svg" alt="Job Apply Assistant: search, match and apply in your own browser" width="100%">
 </p>
@@ -67,6 +69,57 @@ flowchart TD
     class D,L chat
     class K store
 ```
+
+## What it looks like
+
+This is the first run, screen by screen, with a made-up user (Jane, a nurse). The question screens (2, 3, 6, 7 and 8) are **generated from the skill's own files**, so their wording is exactly what you will see. The assistant words the other messages itself (screens 1, 4 and 5), so yours will differ a little.
+
+<p align="center">
+  <img src="docs/screens/01-setup.svg" alt="Screen 1: the skill checks your computer and asks before installing anything" width="100%"><br>
+  <sub><b>1. Setup.</b> It checks your computer and asks before installing anything.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/02-boards.svg" alt="Screen 2: pick your job boards by typing numbers, names or a shortcut" width="100%"><br>
+  <sub><b>2. Pick your boards.</b> Type numbers, names or a shortcut. No clicking.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/03-referrals.svg" alt="Screen 3: the referral question in plain English with numbered choices" width="100%"><br>
+  <sub><b>3. Referrals, in plain English.</b> Simple numbers; the safest choices are listed first.</sub>
+</p>
+
+<details>
+<summary><b>Screens 4 to 8</b>: unclear answers, about you, sign-in check, board profiles, dry-run record</summary>
+
+<p align="center">
+  <img src="docs/screens/04-unclear-answer.svg" alt="Screen 4: an unclear answer like both or okay never means send" width="100%"><br>
+  <sub><b>4. When an answer is unclear.</b> "Both" or "okay" never means "send". It keeps the safe choice and asks again.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/05-about-you.svg" alt="Screen 5: your resume and the few questions a resume cannot answer" width="100%"><br>
+  <sub><b>5. About you.</b> Your resume, then the few things a resume can't answer.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/06-signin-check.svg" alt="Screen 6: the skill checks each board's login itself and reports what is missing" width="100%"><br>
+  <sub><b>6. Sign-in check.</b> The skill checks each board itself, then tells you which logins are missing.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/07-board-profiles.svg" alt="Screen 7: review or update your profile on each signed-in board" width="100%"><br>
+  <sub><b>7. Board profiles.</b> Review only, update after you approve, or leave it alone.</sub>
+</p>
+
+<p align="center">
+  <img src="docs/screens/08-dry-run-record.svg" alt="Screen 8: what a dry run saves instead of submitting" width="100%"><br>
+  <sub><b>8. Dry-run record.</b> What would have been sent, saved instead of submitted.</sub>
+</p>
+
+</details>
+
+These screens are drawn like a terminal because that is how Claude Code looks. The Claude desktop app and chat apps look different but ask the same questions. Maintainers can rebuild the images with `python3 docs/make_screens.py`.
 
 ## Where does it run?
 
@@ -269,6 +322,8 @@ scripts/tailor.py                reorder/reword a base resume, then build
 portable/                        chat mode: one prompt for ChatGPT, Gemini or Claude chat, plus setup steps
 AGENTS.md, GEMINI.md             pointers for other coding agents (experimental)
 docs/banner.svg                  the banner image at the top of this README
+docs/screens/                    the screen images in "What it looks like" (built by docs/make_screens.py)
+docs/make_screens.py             builds those images from the skill's own text, so they never drift
 examples/                        made-up sample files
 ```
 
