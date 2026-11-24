@@ -41,7 +41,7 @@ Read these first. They do not bend for speed or batch size.
 
 ## Workspace
 
-Run `scripts/doctor.sh` once at the start of the first run and fix what it reports.
+Setup (Phase 0a) comes first; run `scripts/doctor.sh` again whenever something seems broken.
 Ask the user once where to keep files (default `~/job-hunt/`) and remember the answer in
 `workspace.txt` inside it. Layout:
 
@@ -60,6 +60,27 @@ Ask the user once where to keep files (default `~/job-hunt/`) and remember the a
 The user's master resume (and optional cover letter) live wherever they keep them; store
 the exact paths in `profile.md`. Never modify the master. Never overwrite `profile.md`
 silently - show a diff and confirm.
+
+## Phase 0a - Self-setup (do this yourself, before asking any onboarding question)
+
+Do not make the user set things up. On the first run:
+1. Run `scripts/doctor.sh` and `scripts/install_missing.sh plan`.
+2. If something is missing, show ONE short message: what is missing, what it is for, and the
+   exact command that would run (the package manager's own repository only, nothing else).
+   Say that downloads change their computer and ask for ONE yes covering the list ("yes to
+   all" or name the items). Do not download or install anything before that yes.
+3. On the yes, run `scripts/install_missing.sh install <items>`. It installs only from brew,
+   apt-get or dnf, never runs `curl | bash`, never installs Homebrew, and never types a
+   password: if a command needs `sudo` it prints it for the user to run, and you wait for
+   "done". Then run `doctor.sh` again to verify.
+4. Check the browser tool yourself: list the user's open Chrome tabs. If that fails, the Chrome
+   automation extension is not connected. You cannot install an extension for them (Chrome
+   needs their click). Tell them the exact steps in plain words, open the extension's page for
+   them if you can, wait for "done", and check again.
+5. Gmail and Calendar connectors are only for `inbox` mode. Do not set them up unless the
+   user asks for `inbox`; then explain they grant access themselves.
+6. Required tools missing and the user says no: stop and say what will not work. Optional
+   tools missing: continue and note which features are off (for example tailored PDFs).
 
 ## Phase 0 - First run onboarding (once)
 

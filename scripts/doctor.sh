@@ -62,5 +62,5 @@ else opt "no Word/LibreOffice found: tailored resumes stay .docx until you expor
 [[ -n "${APIFY_TOKEN:-}" ]] && ok "APIFY_TOKEN set (bulk search)" || opt "no APIFY_TOKEN: the skill searches through your browser instead"
 
 echo
-if (( FAIL )); then echo "Result: fix the MISSING items above, then run again."; exit 1; fi
+if (( FAIL )); then echo "Result: fix the MISSING items above, then run again. To see what can be installed for you: scripts/install_missing.sh plan"; exit 1; fi
 echo "Result: shell checks passed. Last check: ask Claude to list your open Chrome tabs. If it cannot, install/connect the Chrome automation tool."

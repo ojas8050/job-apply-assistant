@@ -56,6 +56,26 @@ Have these before you start so onboarding takes about five minutes:
    and the optional tools. Then ask Claude to list your open Chrome tabs; if it cannot, the
    Chrome automation tool is not connected yet.
 
+## 3b. Automatic setup (the skill does it for you)
+
+You don't need to install the helper tools yourself. On the first run the skill checks your
+computer and shows you what is missing, for example:
+
+> Missing: pandoc (only for tailored resumes). It would run `brew install pandoc`.
+> OK to install? Say "yes to all" or name the items.
+
+Only after your yes does it install, and only from your system's package manager (Homebrew on
+macOS, apt or dnf on Linux). It never runs scripts from the internet, never installs Homebrew
+for you, and never types your password: if a command needs `sudo` it prints it for you to run.
+
+It cannot install the **Chrome automation extension** for you, because Chrome needs your click
+to add any extension. The skill checks whether the extension is connected, and if not it tells
+you the exact steps and checks again when you say "done". Gmail and Calendar connectors are
+only needed for the `inbox` command and you grant them yourself.
+
+You can also run it by hand: `scripts/install_missing.sh plan` shows what is missing, and
+`scripts/install_missing.sh install pandoc --dry-run` shows a command without running it.
+
 ## 4. First run: what happens
 
 Say something like **"find me jobs"** or **"run the job-apply-assistant skill"**. The skill asks, in order:
@@ -215,6 +235,7 @@ references/referrals-and-dms     optional referral / DM pass, off by default
 references/board-profile-update  optional review/update of your profile on each signed-in board
 references/signin-check          the skill checks each board's login itself and reports what's missing
 references/{follow-ups,inbox-to-calendar,interview-prep,weekly-review,apify,scheduling}
+scripts/install_missing.sh       installs missing tools from your package manager, only after your yes
 scripts/doctor.sh                setup check (Python, pandoc, resume path, optional tools)
 scripts/dedupe_check.py          cross-board duplicate check
 scripts/build_resume.sh          markdown -> docx -> pdf (pandoc; Word or LibreOffice)
