@@ -25,6 +25,7 @@
   <a href="#how-it-works">How it works</a> &nbsp;|&nbsp;
   <a href="#you-stay-in-control">Safety</a> &nbsp;|&nbsp;
   <a href="#commands">Commands</a> &nbsp;|&nbsp;
+  <a href="#contributing">Contribute</a> &nbsp;|&nbsp;
   <a href="#troubleshooting">Troubleshooting</a>
 </p>
 
@@ -347,6 +348,26 @@ Ways to publish:
 If this will be shared outside your company or organization, check whether your employer needs to sign off on it first.
 
 </details>
+
+## Contributing
+
+**Ideas, fixes and upgrades are welcome.** Anyone with a GitHub account can suggest an edit. You don't need to ask first.
+
+1. **Fork** this repo (the Fork button, top right). That makes your own copy.
+2. **Make a branch** in your copy, change what you want, and push it there.
+3. **Open a pull request** to this repo. Say what you changed and what you tested.
+4. **I review it.** Nothing goes into `main` without my approval, and I'm the only person who can merge. I may ask you to change something first.
+
+> [!NOTE]
+> Nobody else has write access to this repo, and `main` is protected, so a pull request from your fork is the way in. That keeps every change reviewed before it reaches the people who use the skill.
+
+**Built something on top of this?** A new job board, a better prompt, a version for another assistant: open a pull request and I'll look at it. You can also message me on LinkedIn to talk it through first: [linkedin.com/in/ojas-chopade](https://www.linkedin.com/in/ojas-chopade). Please don't send code in messages. Open a pull request so it can be reviewed in the open. Messaging me doesn't skip the review.
+
+**Want your own version?** The MIT license lets you modify it freely. If your version is better, send the changes back.
+
+**Not a coder?** Open an [issue](https://github.com/ojas8050/job-apply-assistant/issues) with your idea or the problem you hit.
+
+Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) first. It lists what is welcome, what will be rejected (personal data, or anything that weakens the safety rules), and the checks to run before you open a pull request.
 
 ## License
 
