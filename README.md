@@ -1,4 +1,5 @@
-> **Built on Claude.** This skill is made for Claude (Claude Code), and it may not work the same in other AI agents like Cursor, Gemini or ChatGPT. You can still try it there: start with the chat-mode prompt in [`portable/`](portable/README.md).
+> [!WARNING]
+> **Built on Claude.** This skill is made for Claude (Claude Code) and may not work the same in other AI agents like Cursor, Gemini or ChatGPT. You can still try it there: start with the chat-mode prompt in [`portable/`](portable/README.md).
 
 <p align="center">
   <img src="docs/banner.svg" alt="Job Apply Assistant: search, match and apply in your own browser" width="100%">
