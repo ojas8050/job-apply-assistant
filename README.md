@@ -1,169 +1,197 @@
-# job-apply-assistant
+<p align="center">
+  <img src="docs/banner.svg" alt="Job Apply Assistant: search, match and apply in your own browser" width="100%">
+</p>
 
-A Claude Code skill that finds jobs that fit your resume, fills the applications in your own
-logged-in browser, and keeps a tracker. It ships with no personal data: your profile,
-preferences, resume and tracker live in a workspace folder on your computer (default
-`~/job-hunt/`), created by an onboarding chat the first time you use it.
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-2563EB?style=for-the-badge">
+  <img alt="Agent mode: Claude Code" src="https://img.shields.io/badge/agent%20mode-Claude%20Code-6C47FF?style=for-the-badge">
+  <img alt="Chat mode: ChatGPT, Gemini, Claude" src="https://img.shields.io/badge/chat%20mode-ChatGPT%20%7C%20Gemini%20%7C%20Claude-10A37F?style=for-the-badge">
+  <img alt="Dry run built in" src="https://img.shields.io/badge/dry%20run-built%20in-F59E0B?style=for-the-badge">
+  <img alt="No personal data in the repo" src="https://img.shields.io/badge/personal%20data-none%20in%20repo-16A34A?style=for-the-badge">
+  <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white">
+</p>
 
-You stay in control. By default it shows you a summary before it submits anything, never
-types government IDs, passwords or codes, and never sends messages for you.
+<p align="center">
+  <b>Finds jobs that fit your resume, fills the applications in your own logged-in browser, and keeps a tracker.</b><br>
+  You stay in control: it shows you a summary before it submits anything.
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> &nbsp;|&nbsp;
+  <a href="#where-does-it-run">Where it runs</a> &nbsp;|&nbsp;
+  <a href="#how-it-works">How it works</a> &nbsp;|&nbsp;
+  <a href="#you-stay-in-control">Safety</a> &nbsp;|&nbsp;
+  <a href="#commands">Commands</a> &nbsp;|&nbsp;
+  <a href="#troubleshooting">Troubleshooting</a>
+</p>
 
 ---
+
+## What you get
+
+<table>
+  <tr>
+    <td width="25%" valign="top"><h4>Search</h4>16 job boards, every job description actually read, no judging by title</td>
+    <td width="25%" valign="top"><h4>Match</h4>Scores each job 0 to 100 and tells you the best reason to apply and the biggest risk</td>
+    <td width="25%" valign="top"><h4>Apply</h4>Fills forms from your profile in your own Chrome. Dry run first, then you approve</td>
+    <td width="25%" valign="top"><h4>Track</h4>Every job logged, with a cross-board duplicate check so you never apply twice</td>
+  </tr>
+</table>
+
+It ships with **no personal data**. Your profile, preferences, resume and tracker live in a workspace folder on your computer (default `~/job-hunt/`), created by a short onboarding chat the first time you use it.
+
+## How it works
+
+```mermaid
+flowchart TD
+    A([You say: find me jobs]) --> B{Can I control<br/>your browser?}
+    B -- Yes --> C[Agent mode]
+    B -- No --> D[Chat mode]
+    C --> E[Automatic setup<br/>asks before installing]
+    E --> F[Pick boards and<br/>answer a few questions]
+    F --> G[Sign-in check<br/>done by the skill]
+    G --> H[Search and read<br/>every job description]
+    H --> I[Duplicate check<br/>and score]
+    I --> J[Fill forms<br/>dry run or apply]
+    J --> K[(Tracker)]
+    D --> L[Paste a job:<br/>score, tailor, cover letter,<br/>form answers, interview prep]
+
+    classDef start fill:#4F46E5,stroke:#312E81,color:#ffffff
+    classDef decision fill:#F59E0B,stroke:#B45309,color:#1f2937
+    classDef agent fill:#0EA5E9,stroke:#075985,color:#ffffff
+    classDef chat fill:#10A37F,stroke:#065F46,color:#ffffff
+    classDef store fill:#16A34A,stroke:#14532D,color:#ffffff
+    class A start
+    class B decision
+    class C,E,F,G,H,I,J agent
+    class D,L chat
+    class K store
+```
 
 ## Where does it run?
 
 | How you use it | Works with | Browser automation | Status |
 |---|---|---|---|
-| **Full agent mode** (searches boards, fills forms, tracks, dry run) | **Claude Code** and the Claude desktop app | Yes, through a Chrome automation extension | Built and tested here |
-| **Agent mode on other tools** | Other coding agents that have a browser tool (see `AGENTS.md`, `GEMINI.md`) | Only if the tool can control your own browser | Experimental, untested |
-| **Chat mode** (profile, scoring, tailored resume text, cover letters, form answers, interview prep) | **ChatGPT, Gemini, Claude chat**, any assistant with custom instructions | No. You do the clicking | See `portable/README.md` |
+| **Agent mode**: searches boards, fills forms, tracks, dry run | **Claude Code** and the Claude desktop app | Yes, through a Chrome automation extension | ![beta](https://img.shields.io/badge/status-beta-F59E0B) scripts and conversations tested; live runs on real boards still being proven |
+| **Agent mode on other tools** | Other coding agents with a browser tool (see `AGENTS.md`, `GEMINI.md`) | Only if the tool controls your own browser | ![experimental](https://img.shields.io/badge/status-experimental-EF4444) untested |
+| **Chat mode**: profile, scoring, tailored resume text, cover letters, form answers, interview prep | **ChatGPT, Gemini, Claude chat**, any assistant with custom instructions | No. You do the clicking | ![tested on Claude](https://img.shields.io/badge/tested-Claude%20only-F59E0B) see [`portable/README.md`](portable/README.md) |
 
-Chat mode needs no installation: you paste one prompt into a custom GPT, a Gem or a Claude
-project (`portable/ASSISTANT-PROMPT.md`). It cannot search boards or fill forms, because chat
-apps cannot control your browser. If you only use ChatGPT or Gemini, start there.
+> [!NOTE]
+> **Only use ChatGPT or Gemini?** Start with chat mode. You paste one prompt (`portable/ASSISTANT-PROMPT.md`) into a custom GPT, a Gem or a Claude project. It can't search boards or fill forms, because chat apps can't control your browser.
 
----
+## Quick start
 
-## 1. What you need
+1. **Copy this folder** to `~/.claude/skills/job-apply-assistant/` (or to `<your project>/.claude/skills/job-apply-assistant/`).
+2. **Start a new Claude Code session** and say **"find me jobs"**. The skill checks your computer, offers to install anything missing (after your yes), then asks a few questions.
+3. **Sign in to your job boards in Chrome** before the search starts.
 
-**Required**
-| What | Why |
+> [!IMPORTANT]
+> The skill works inside **your own Chrome browser, using your own logins**. It never asks for, sees or types your passwords. A board you are signed out of is skipped until you sign in.
+
+> [!TIP]
+> Say **"dry run"** for your first run. It fills the forms but never presses Submit, so you see exactly what would be sent.
+
+## What you need
+
+| Required | Why |
 |---|---|
 | **Claude Code** (desktop app or CLI) | Runs the skill |
-| **A browser-automation tool for your AI assistant** that drives your own Chrome, for example the **Claude in Chrome** extension (install it from Anthropic's current instructions) | Lets Claude search boards and fill forms in the browser where you are already signed in |
-| **Google Chrome**, signed in to the job boards you want to use | The skill uses your existing logins and never asks for passwords |
+| **A browser-automation tool for your AI assistant** that drives your own Chrome, for example the **Claude in Chrome** extension (install it from Anthropic's current instructions) | Lets the assistant search boards and fill forms where you are already signed in |
+| **Google Chrome**, signed in to the boards you want | The skill uses your existing logins |
 | **Your resume as a PDF** | Uploaded to forms and read to build your profile |
 | **Python 3.9 or newer** (`python3 --version`) | Runs the duplicate checker and resume helper |
 
-**Optional (install only what you need)**
+<details>
+<summary><b>Optional tools</b> (install only what you need)</summary>
+
 | What | When you need it |
 |---|---|
 | **pandoc** (https://pandoc.org) + **LibreOffice** (https://www.libreoffice.org) or Microsoft Word | Only for tailored resumes (`tailor` mode): Markdown -> DOCX -> PDF |
-| **Gmail and Google Calendar connectors** for Claude | Only for `inbox` mode (recruiter email -> draft replies and interview slots) |
+| **Gmail and Google Calendar connectors** | Only for `inbox` mode (recruiter email -> draft replies and interview slots) |
 | **An Apify account + `APIFY_TOKEN`** (https://apify.com) | Only if you want bulk search without the browser |
 | **A LinkedIn account** | Only for the LinkedIn board and the referral/DM pass |
 
-## 2. Files and information to have ready
+</details>
 
-Have these before you start so onboarding takes about five minutes:
-1. **Resume (PDF)**, the version you want sent by default. Keep it under 2 MB (LinkedIn's
-   limit). A `.md` or `.docx` copy is only needed if you want per-job tailoring.
-2. **Cover letter (PDF)**, optional. If you give one, say whether to attach it everywhere
-   there is an upload slot.
+<details>
+<summary><b>Files and information to have ready</b> (about five minutes)</summary>
+
+1. **Resume (PDF)**, the version you want sent by default. Keep it under 2 MB (LinkedIn's limit). A `.md` or `.docx` copy is only needed for per-job tailoring.
+2. **Cover letter (PDF)**, optional. Say whether to attach it everywhere there is an upload slot.
 3. **Certificates or transcripts**, optional. Some company forms ask for them.
 4. **Links**: LinkedIn, GitHub, portfolio (or "none").
-5. **Answers a resume does not contain:** work authorization for each country you would
-   work in, notice period, current and expected pay (and whether to disclose current pay),
-   relocation, preferred cities, remote or on-site, earliest start date.
-6. **A list of skills you do NOT have.** This keeps the skill from putting you in roles you
-   cannot do and from claiming a skill on a form.
+5. **Answers a resume does not contain:** work authorization for each country, notice period, current and expected pay (and whether to disclose current pay), relocation, preferred cities, remote or on-site, earliest start date.
+6. **A list of skills you do NOT have.** This keeps the skill from putting you in roles you cannot do and from claiming a skill on a form.
 7. **Which boards you use and are signed in on** (the skill asks).
 
-## 3. Install
+</details>
 
-1. Copy this folder to `~/.claude/skills/job-apply-assistant/` (personal use) or to
-   `<your project>/.claude/skills/job-apply-assistant/`.
-2. Install the Chrome automation tool for Claude and sign in to your job boards in Chrome.
-3. Optional tools: `pandoc` and LibreOffice (or Word) for tailored resumes.
-4. Start a **new** Claude Code session so it loads the skill.
-5. Say "run the doctor" (or run `scripts/doctor.sh`) to check Python, pandoc, your resume path
-   and the optional tools. Then ask Claude to list your open Chrome tabs; if it cannot, the
-   Chrome automation tool is not connected yet.
+### Automatic setup
 
-## 3b. Automatic setup (the skill does it for you)
-
-You don't need to install the helper tools yourself. On the first run the skill checks your
-computer and shows you what is missing, for example:
+You don't need to install the helper tools yourself. On the first run the skill shows what is missing, for example:
 
 > Missing: pandoc (only for tailored resumes). It would run `brew install pandoc`.
 > OK to install? Say "yes to all" or name the items.
 
-Only after your yes does it install, and only from your system's package manager (Homebrew on
-macOS, apt or dnf on Linux). It never runs scripts from the internet, never installs Homebrew
-for you, and never types your password: if a command needs `sudo` it prints it for you to run.
+It installs only after your yes, and only from your system's package manager (Homebrew on macOS, apt or dnf on Linux). It never runs scripts from the internet, never installs Homebrew for you, and never types your password: if a command needs `sudo` it prints it for you to run.
 
-It cannot install the **Chrome automation extension** for you, because Chrome needs your click
-to add any extension. The skill checks whether the extension is connected, and if not it tells
-you the exact steps and checks again when you say "done". Gmail and Calendar connectors are
-only needed for the `inbox` command and you grant them yourself.
+It **cannot** install the Chrome automation extension for you, because Chrome needs your click to add any extension. The skill checks whether it is connected, tells you the exact steps if not, and checks again when you say "done". Gmail and Calendar connectors are only for `inbox` and you grant them yourself.
 
-You can also run it by hand: `scripts/install_missing.sh plan` shows what is missing, and
-`scripts/install_missing.sh install pandoc --dry-run` shows a command without running it.
+By hand: `scripts/install_missing.sh plan` shows what is missing, and `scripts/install_missing.sh install pandoc --dry-run` shows a command without running it. `scripts/doctor.sh` checks Python, pandoc, your resume path and the optional tools.
 
-## 4. First run: what happens
+## First run: what it asks
 
-Say something like **"find me jobs"** or **"run the job-apply-assistant skill"**. The skill asks, in order:
+Say **"find me jobs"** or **"run the job-apply-assistant skill"**. It asks, in order:
 
-1. **Which job boards to use**: one message with a numbered list of 16 (LinkedIn Jobs,
-   Indeed, Naukri, Glassdoor, Hirist, Wellfound, Instahyre, TopHire, Foundit, Cutshort,
-   Welcome to the Jungle, Y Combinator Work at a Startup, Himalayas, Flexiple, company career
-   sites, LinkedIn feed hiring posts). You just **type** your answer: numbers ("1, 2, 4"),
-   names, `all`, or a shortcut (`india` or `global`). It repeats your choice back so you can
-   correct it, and asks which boards you are already signed in on. It tells you up front: **sign in to every
-   board you pick, in your own Chrome, before the search starts.** The skill never asks for or
-   types your passwords, and it skips any board you are signed out of.
-2. **Referrals (optional).** In plain words: "Do you want help asking people at companies to
-   refer you?" You type 1 (no thanks), 2 (write the messages, you send them), 3 (send them to
-   people you're already connected with on LinkedIn), or 4 (also send connection requests). A
-   second question asks whether recruiter emails are written for you to send (1) or sent for
-   you (2). Not sure? Type "1 and 1".
-3. **Your resume** (and cover letter). It reads the resume and builds `profile.md`.
-4. **The things a resume lacks** (authorization, notice period, pay, relocation, cities).
-5. **Skills you do not have.**
-6. **Run rules:** experience range, apply without asking or confirm each time, how deep to
-   search, abroad and remote, optional consent boxes.
-7. **Dry run first?** (recommended): fills forms but never submits, so you see exactly what
-   would be sent.
-8. **Keyword check:** it shows the job titles and search terms it derived from your resume
-   (and the gaps it noticed) so you can edit them.
-9. **Confirm the profile.** Nothing runs until you approve it.
-10. **Sign-in check, done by the skill itself.** After you approve the profile, it opens each
-    chosen board in your Chrome and looks. It then tells you in one message which boards are
-    signed in, which are not, and which it couldn't tell. Sign in to the missing ones yourself,
-    then say "signed in" and it re-checks only those. It never searches a board that is signed
-    out, and never sees or types your password.
-11. **Board profiles.** For every board you're signed in on, it asks whether to **R**eview your
-    profile there (it tells you what to fix, changes nothing), **U**pdate it (it shows the exact
-    changes first and edits only after you approve), or **N** leave it alone. Employers often
-    read the board profile, not just your resume. It uses only facts from your resume, never
-    adds skills you said you don't have, and asks separately before touching visibility or
-    privacy settings.
+| # | Question | In short |
+|---|---|---|
+| 1 | **Which job boards?** | One message, 16 numbered boards. You **type** numbers (`1, 2, 4`), names, `all`, or a shortcut (`india`, `global`). It repeats your choice once. |
+| 2 | **Referrals (optional)** | "Do you want help asking people at companies to refer you?" Type 1 (no thanks), 2 (write the messages, you send them), 3 (send to people you're already connected with), or 4 (also send connection requests). A second question covers recruiter emails: 1 (write it, you send) or 2 (send it for you). Not sure? Type "1 and 1". |
+| 3 | **Your resume** | And your cover letter. It builds `profile.md`. |
+| 4 | **What a resume lacks** | Years of experience, work authorization, notice period, pay, relocation, cities. |
+| 5 | **Skills you do not have** | So it never claims them. |
+| 6 | **Run rules** | Experience range, ask before applying, search depth, abroad and remote, optional consent boxes. |
+| 7 | **Dry run first?** | Recommended. |
+| 8 | **Keyword check** | The job titles and gaps it found. You edit them. |
+| 9 | **Confirm the profile** | Nothing runs until you approve. |
+| 10 | **Sign-in check, done by the skill** | It opens each board in your Chrome and tells you which are signed in, signed out, or unclear. You sign in, say "signed in", and it re-checks only those. |
+| 11 | **Board profiles** | For each signed-in board: **R** review only, **U** update after you approve the exact changes, or **N** leave it alone. Facts from your resume only. |
 
 Everything is saved in the workspace, so the next run skips onboarding.
 
-## 5. Every run: what it does
+## Every run
 
-1. **Search** each chosen board: search bar, several keyword combinations, last 24 hours then
-   last 7 days, home city plus remote (and abroad if you allowed it). It **opens and reads
-   the job description of every job**, never judging from the title alone.
-2. **Duplicate check across boards** (`scripts/dedupe_check.py`): the same job on LinkedIn,
-   Indeed and Naukri is applied to once. It matches job ids, URLs, and company + title + city.
-3. **Score** each job 0-100 and show a shortlist with the main reason to apply and the main
-   risk. You can drop rows.
-4. **Tailor** the resume only when a job needs a skill you really have that your resume
-   buries. It reframes true bullets and never invents anything.
-5. **Apply:** it fills the form from your profile, checks every autofilled field, answers
-   screening questions (and asks you once for any it does not know, then remembers), shows a
-   summary, and submits after your OK (unless you pre-approved a batch).
-6. **Log** every job in `applications.csv`: applied, skipped (with the reason from the JD),
-   failed, queued, or unverified.
-7. **Report:** counts, what is waiting on you, searches that stopped early and why.
+| Step | What happens |
+|---|---|
+| **1. Search** | Search bar, several keyword combinations, last 24 hours then 7 days, home city plus remote (abroad if you allowed it). It **opens and reads every job description**. |
+| **2. Duplicate check** | The same job on LinkedIn, Indeed and Naukri is applied to once (`scripts/dedupe_check.py`): job ids, URLs, company + title + city. |
+| **3. Score** | 0 to 100 with the main reason to apply and the main risk. You can drop rows. |
+| **4. Tailor** | Only when a job needs a skill you really have that your resume buries. True bullets reframed, nothing invented. |
+| **5. Apply** | Fills the form, checks every autofilled field, answers screening questions (asks once for unknowns, then remembers), shows a summary, submits after your OK. |
+| **6. Log** | `applications.csv`: applied, skipped (with the reason), failed, queued, or unverified. |
+| **7. Report** | Counts, what is waiting on you, searches that stopped early and why. |
 
-## 6. What you will have to do yourself
+## You stay in control
 
-The skill stops and hands over (listing each item in `queue.md`) for:
+> [!WARNING]
+> **What it will never do:** invent facts, type government IDs, passwords or bank details, solve CAPTCHAs, create accounts, accept background or credit-check consents, or send messages without your go-ahead.
+
+**What you will have to do yourself** (each item goes into `queue.md`):
+
 - government IDs, tax numbers, bank details, passwords and one-time codes
 - CAPTCHAs, human-verification checks, logins and timed assessments
 - legal declarations and consents (background, credit, criminal checks)
-- anything it cannot do in a custom form widget (for example some date pickers or upload
-  buttons); it tells you exactly which field is left
+- anything it cannot do in a custom form widget (for example some date pickers or upload buttons). It tells you exactly which field is left.
 
-## 7. Commands you can use
+> [!CAUTION]
+> Some job sites forbid automation in their terms of use. You use this on your own accounts at your own risk, and a site may limit or suspend an account for automated use. Your resume and answers go to the employers and boards you apply to; the skill sends nothing anywhere else.
+
+## Commands
 
 | Say | What happens |
 |---|---|
 | "find me jobs" / "apply to jobs" | Full run (search, shortlist, apply) |
-| `dry-run` | Full flow, but it never presses Submit; it saves what it would send. Recommended for your first run |
+| `dry-run` | Full flow, never presses Submit, saves what it would send. Recommended first |
 | `doctor` | Checks your setup and tells you what is missing |
 | `profile-update <board>` | Review or update your profile on one signed-in board (never applies to jobs) |
 | `search <role> in <city>` | Search and score only, no applying |
@@ -174,7 +202,10 @@ The skill stops and hands over (listing each item in `queue.md`) for:
 | `followup` | Draft follow-up notes for applications older than 7 days |
 | `review` | Weekly analysis and three changes for next week |
 
-## 8. Files it creates in your workspace
+## More
+
+<details>
+<summary><b>Files it creates in your workspace</b></summary>
 
 ```
 ~/job-hunt/
@@ -188,15 +219,18 @@ The skill stops and hands over (listing each item in `queue.md`) for:
 ```
 These hold personal data. Keep them out of public repos and never paste them into other tools.
 
-## 8b. Examples and scheduling
+</details>
 
-- `examples/` has made-up sample files (a profile, preferences, a tracker with a duplicate and
-  an unverified row, a shortlist, a waiting-on-you queue, and a dry-run record) so you can
-  see what you will get before you start.
-- `references/scheduling.md` explains how to run a daily 24-hour search (search or dry-run
-  only) and what cannot run unattended.
+<details>
+<summary><b>Examples and scheduling</b></summary>
 
-## 9. Troubleshooting
+- `examples/` has made-up sample files (a profile, preferences, a tracker with a duplicate and an unverified row, a shortlist, a waiting-on-you queue, and a dry-run record) so you can see what you will get before you start.
+- `references/scheduling.md` explains how to run a daily 24-hour search (search or dry-run only) and what cannot run unattended.
+
+</details>
+
+<details id="troubleshooting">
+<summary><b>Troubleshooting</b></summary>
 
 | Symptom | What to do |
 |---|---|
@@ -209,35 +243,10 @@ These hold personal data. Keep them out of public repos and never paste them int
 | `doctor` reports MISSING | Fix the listed item, run it again |
 | Tailored PDF will not build | Install `pandoc` and LibreOffice (or Word), or open the generated `.docx` and export a PDF |
 
-## 10. Safety, privacy and terms
+</details>
 
-It will not invent facts, type government IDs, passwords or bank details, solve CAPTCHAs,
-create accounts, accept background/credit-check consents, or send messages without your
-go-ahead. Some job sites forbid automation in their terms of use; you use this on your own
-accounts at your own risk, and a site may limit or suspend an account for automated use.
-Your resume and answers are sent to the employers and boards you apply to; the skill sends
-nothing anywhere else.
-
-## 11. Publishing checklist (maintainers)
-
-Before publishing, confirm nothing personal is in the folder:
-```bash
-grep -rniE '@(gmail|outlook|yahoo)\.|[0-9]{10}|/Users/|Desktop|Downloads' .
-```
-Expected: only the example paths in this README. Never add `profile.md`, `preferences.md`,
-`applications.csv`, `queue.md`, resumes or cover letters (see `.gitignore`).
-
-Ways to publish:
-- **GitHub repo:** put this folder at the repo root (or under `skills/job-apply-assistant/`), the
-  `LICENSE` file (MIT) is already included; push. Users copy the folder into `~/.claude/skills/`.
-- **Claude Code plugin:** wrap it with a `.claude-plugin/plugin.json` and a
-  `skills/job-apply-assistant/` directory, then list it in a plugin marketplace repo.
-- **Zip:** `zip -r job-apply-assistant.zip job-apply-assistant -x '*.DS_Store'`.
-
-If this will be shared outside your company or organization, check whether your employer
-needs to sign off on it first.
-
-## 12. Layout
+<details>
+<summary><b>Repository layout</b></summary>
 
 ```
 SKILL.md                         entry point: rules, onboarding, phases, modes
@@ -253,17 +262,36 @@ references/board-profile-update  optional review/update of your profile on each 
 references/signin-check          the skill checks each board's login itself and reports what's missing
 references/{follow-ups,inbox-to-calendar,interview-prep,weekly-review,apify,scheduling}
 scripts/install_missing.sh       installs missing tools from your package manager, only after your yes
-portable/                        chat mode: one prompt for ChatGPT, Gemini or Claude chat, plus setup steps
-AGENTS.md, GEMINI.md             pointers for other coding agents (experimental)
 scripts/doctor.sh                setup check (Python, pandoc, resume path, optional tools)
 scripts/dedupe_check.py          cross-board duplicate check
 scripts/build_resume.sh          markdown -> docx -> pdf (pandoc; Word or LibreOffice)
 scripts/tailor.py                reorder/reword a base resume, then build
+portable/                        chat mode: one prompt for ChatGPT, Gemini or Claude chat, plus setup steps
+AGENTS.md, GEMINI.md             pointers for other coding agents (experimental)
+docs/banner.svg                  the banner image at the top of this README
 examples/                        made-up sample files
 ```
 
-## 13. License
+</details>
 
-MIT. See `LICENSE`. The skill is provided as is, without warranty: you are responsible for what is
-submitted in your name on job boards. Please review each application, and use the dry-run mode
-first.
+<details>
+<summary><b>Publishing checklist</b> (maintainers)</summary>
+
+Before publishing, confirm nothing personal is in the folder:
+```bash
+grep -rniE '@(gmail|outlook|yahoo)\.|[0-9]{10}|/Users/|Desktop|Downloads' .
+```
+Expected: only the example paths in this README. Never add `profile.md`, `preferences.md`, `applications.csv`, `queue.md`, resumes or cover letters (see `.gitignore`).
+
+Ways to publish:
+- **GitHub repo:** put this folder at the repo root (or under `skills/job-apply-assistant/`). The `LICENSE` file (MIT) is already included. Users copy the folder into `~/.claude/skills/`.
+- **Claude Code plugin:** wrap it with a `.claude-plugin/plugin.json` and a `skills/job-apply-assistant/` directory, then list it in a plugin marketplace repo.
+- **Zip:** `zip -r job-apply-assistant.zip job-apply-assistant -x '*.DS_Store'`.
+
+If this will be shared outside your company or organization, check whether your employer needs to sign off on it first.
+
+</details>
+
+## License
+
+MIT. See [`LICENSE`](LICENSE). The skill is provided as is, without warranty: you are responsible for what is submitted in your name on job boards. Please review each application, and use the dry-run mode first.
