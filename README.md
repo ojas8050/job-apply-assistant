@@ -16,22 +16,33 @@
 
 <p align="center">
   <b>Finds jobs that fit your resume, fills the applications in your own logged-in browser, and keeps a tracker.</b><br>
-  You stay in control: it shows you a summary before it submits anything.
+  You stay in control: it shows you a summary before it submits anything.<br>
+  <i>(Because refreshing job boards at 2 a.m. is not a personality.)</i>
 </p>
 
-<p align="center">
-  <a href="#quick-start">Quick start</a> &nbsp;|&nbsp;
-  <a href="#where-does-it-run">Where it runs</a> &nbsp;|&nbsp;
-  <a href="#how-it-works">How it works</a> &nbsp;|&nbsp;
-  <a href="#you-stay-in-control">Safety</a> &nbsp;|&nbsp;
-  <a href="#commands">Commands</a> &nbsp;|&nbsp;
-  <a href="#contributing">Contribute</a> &nbsp;|&nbsp;
-  <a href="#troubleshooting">Troubleshooting</a>
-</p>
+## Index
+
+| # | Section | What's in it |
+|---|---|---|
+| 1 | [What you get](#what-you-get) | The four jobs it does for you |
+| 2 | [How it works](#how-it-works) | The whole journey in one picture |
+| 3 | [What it looks like](#what-it-looks-like) | The first run, screen by screen |
+| 4 | [Where does it run?](#where-does-it-run) | Claude Code, other tools, ChatGPT and Gemini |
+| 5 | [Quick start](#quick-start) | Three steps to get going |
+| 6 | [What you need](#what-you-need) | Tools, files and automatic setup |
+| 7 | [First run: what it asks](#first-run-what-it-asks) | The questions, in order |
+| 8 | [Every run](#every-run) | What it does each time |
+| 9 | [You stay in control](#you-stay-in-control) | What it never does, and what is left to you |
+| 10 | [Commands](#commands) | What you can say to it |
+| 11 | [More](#more) | Files it creates, examples, [troubleshooting](#troubleshooting), layout, publishing |
+| 12 | [Contributing](#contributing) | Fork, pull request, say hi |
+| 13 | [License](#license) | MIT, provided as is |
 
 ---
 
 ## What you get
+
+Four jobs it takes off your plate, so you can go make tea:
 
 <table>
   <tr>
@@ -144,9 +155,11 @@ These screens are drawn like a terminal because that is how Claude Code looks. T
 > The skill works inside **your own Chrome browser, using your own logins**. It never asks for, sees or types your passwords. A board you are signed out of is skipped until you sign in.
 
 > [!TIP]
-> Say **"dry run"** for your first run. It fills the forms but never presses Submit, so you see exactly what would be sent.
+> Say **"dry run"** for your first run. It fills the forms but never presses Submit, so you see exactly what would be sent. Think of it as a dress rehearsal, minus the embarrassing part.
 
 ## What you need
+
+The boring but necessary part:
 
 | Required | Why |
 |---|---|
@@ -228,6 +241,8 @@ Everything is saved in the workspace, so the next run skips onboarding.
 
 ## You stay in control
 
+It's a helper, not a runaway robot. Here is the fine print, in plain words.
+
 > [!WARNING]
 > **What it will never do:** invent facts, type government IDs, passwords or bank details, solve CAPTCHAs, create accounts, accept background or credit-check consents, or send messages without your go-ahead.
 
@@ -242,6 +257,8 @@ Everything is saved in the workspace, so the next run skips onboarding.
 > Some job sites forbid automation in their terms of use. You use this on your own accounts at your own risk, and a site may limit or suspend an account for automated use. Your resume and answers go to the employers and boards you apply to; the skill sends nothing anywhere else.
 
 ## Commands
+
+Say them in plain English. No magic words needed.
 
 | Say | What happens |
 |---|---|
@@ -285,7 +302,7 @@ These hold personal data. Keep them out of public repos and never paste them int
 </details>
 
 <details id="troubleshooting">
-<summary><b>Troubleshooting</b></summary>
+<summary><b>Troubleshooting</b> (for when it sulks)</summary>
 
 | Symptom | What to do |
 |---|---|
@@ -351,24 +368,24 @@ If this will be shared outside your company or organization, check whether your 
 
 ## Contributing
 
-**Ideas, fixes and upgrades are welcome.** Anyone with a GitHub account can suggest an edit. You don't need to ask first.
+**Found a typo? Built something cool? Come on in.** Anyone with a GitHub account can suggest an edit, no permission slip needed. The door is open; the coffee is imaginary.
 
-1. **Fork** this repo (the Fork button, top right). That makes your own copy.
+1. **Fork** this repo (the Fork button, top right). Now you have your own copy to break freely.
 2. **Make a branch** in your copy, change what you want, and push it there.
-3. **Open a pull request** to this repo. Say what you changed and what you tested.
-4. **I review it.** Nothing goes into `main` without my approval, and I'm the only person who can merge. I may ask you to change something first.
+3. **Open a pull request** to this repo. Tell me what you changed and what you tested. ("It works on my machine" counts as a feeling, not a test.)
+4. **I review it.** Nothing goes into `main` without my yes, and I hold the only merge button. I might ask you to change something first. Nothing personal, I do it to myself too.
 
 > [!NOTE]
-> Nobody else has write access to this repo, and `main` is protected, so a pull request from your fork is the way in. That keeps every change reviewed before it reaches the people who use the skill.
+> **Why can't I just push?** Because nobody can, not even me. Nobody else has write access and `main` is protected, so a pull request from your fork is the way in. It keeps every change reviewed before it reaches the people who use the skill.
 
-**Built something on top of this?** A new job board, a better prompt, a version for another assistant: open a pull request and I'll look at it. You can also message me on LinkedIn to talk it through first: [linkedin.com/in/ojas-chopade](https://www.linkedin.com/in/ojas-chopade). Please don't send code in messages. Open a pull request so it can be reviewed in the open. Messaging me doesn't skip the review.
+**Built something on top of this?** A new job board, a better prompt, a version for another assistant: open a pull request and I'll take a look. Want to chat first? Find me on LinkedIn: [linkedin.com/in/ojas-chopade](https://www.linkedin.com/in/ojas-chopade). One request: please don't send code in messages. Open a pull request, so it can be reviewed in the open. (Messaging me doesn't skip the review. It does make me smile, though.)
 
-**Want your own version?** The MIT license lets you modify it freely. If your version is better, send the changes back.
+**Want your own version?** Fork it, bend it, make it yours. The MIT license says you can. If your version turns out better, I won't be jealous. Much. Send the good bits back.
 
-**Not a coder?** Open an [issue](https://github.com/ojas8050/job-apply-assistant/issues) with your idea or the problem you hit.
+**Not a coder?** Open an [issue](https://github.com/ojas8050/job-apply-assistant/issues). "It broke" is a fine start. "It broke, and here is what I clicked" is a great one.
 
 Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) first. It lists what is welcome, what will be rejected (personal data, or anything that weakens the safety rules), and the checks to run before you open a pull request.
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE). The skill is provided as is, without warranty: you are responsible for what is submitted in your name on job boards. Please review each application, and use the dry-run mode first.
+MIT. See [`LICENSE`](LICENSE). Use it, change it, share it. If it gets you a job, a thank-you note is very welcome. The skill is provided as is, without warranty: you are responsible for what is submitted in your name on job boards. Please review each application, and use the dry-run mode first.
