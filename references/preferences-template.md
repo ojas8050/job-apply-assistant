@@ -42,8 +42,8 @@ in brackets. Update the file when the user changes their mind and say so.
 
 ## Referrals and DMs (see references/referrals-and-dms.md)
 - Pass enabled? [No]
-- Level: [A drafts only | B send DMs to 1st connections | C also send connection requests]
-- Emails to recruiters found in hiring posts: [drafts only | may send]
+- Level: [1 No | 2 write messages, user sends | 3 send DMs to 1st connections | 4 also send connection requests]  (internal names: No, A, B, C)
+- Emails to recruiters found in hiring posts: [1 write only | 2 may send]
 - Daily cap on DMs + invites: [25-30 DMs, about 15 new invites]
 - People to skip (employers, colleagues, vendors): 
 

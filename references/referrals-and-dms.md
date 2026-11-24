@@ -5,7 +5,36 @@ chooses the level during onboarding. Never go beyond the chosen level, and never
 anything the user has not allowed. LinkedIn is the usual channel; use the user's own
 logged-in session, at human pace.
 
-## Levels (the user picks one; default A)
+## The question to ask (copy exactly; plain English, numbers only)
+
+```
+Do you want help asking people for referrals?
+(A referral is when someone who works at a company recommends you for a job there.
+It often helps you get noticed.)
+
+Type a number:
+  1  No thanks. Skip this.
+  2  Write the messages for me. I will send them myself. (safest)
+  3  Send the messages for me, but only to people I am already connected with on LinkedIn.
+  4  Do number 3, and also send connection requests to people I don't know yet.
+
+One more: some job posts include a recruiter's email address. When you find one, should you:
+  1  Write the email, and I send it myself. (safest)
+  2  Send the email for me.
+
+Not sure? Type "1 and 1". You can change this any time.
+```
+
+Mapping (internal names used in the rest of this file): 1 = No (pass is off), 2 = level A,
+3 = level B, 4 = level C. If the user is unsure or does not answer, use No and "write only".
+
+**Unclear answers:** if the user says things like "both", "A and B", "okay" or "yes", they have
+NOT chosen 3 or 4. Use option 2 (write only) for now, tell them in one line ("I'll write the
+messages and you send them, for now"), and ask the numbered question once more. Sending DMs or
+connection requests needs a clear 3 or 4. Recruiter emails stay "write only" unless they
+clearly choose 2.
+
+## Levels (what each choice means)
 - **A. Drafts only.** Find people and write messages; the user sends them.
 - **B. Send DMs to 1st connections.** Send the referral DM yourself to existing 1st-degree
   connections only. Connection requests stay drafts.

@@ -10,13 +10,27 @@ types government IDs, passwords or codes, and never sends messages for you.
 
 ---
 
+## Where does it run?
+
+| How you use it | Works with | Browser automation | Status |
+|---|---|---|---|
+| **Full agent mode** (searches boards, fills forms, tracks, dry run) | **Claude Code** and the Claude desktop app | Yes, through a Chrome automation extension | Built and tested here |
+| **Agent mode on other tools** | Other coding agents that have a browser tool (see `AGENTS.md`, `GEMINI.md`) | Only if the tool can control your own browser | Experimental, untested |
+| **Chat mode** (profile, scoring, tailored resume text, cover letters, form answers, interview prep) | **ChatGPT, Gemini, Claude chat**, any assistant with custom instructions | No. You do the clicking | See `portable/README.md` |
+
+Chat mode needs no installation: you paste one prompt into a custom GPT, a Gem or a Claude
+project (`portable/ASSISTANT-PROMPT.md`). It cannot search boards or fill forms, because chat
+apps cannot control your browser. If you only use ChatGPT or Gemini, start there.
+
+---
+
 ## 1. What you need
 
 **Required**
 | What | Why |
 |---|---|
 | **Claude Code** (desktop app or CLI) | Runs the skill |
-| **A browser-automation tool for Claude** that drives your own Chrome, for example the **Claude in Chrome** extension (install it from Anthropic's current instructions) | Lets Claude search boards and fill forms in the browser where you are already signed in |
+| **A browser-automation tool for your AI assistant** that drives your own Chrome, for example the **Claude in Chrome** extension (install it from Anthropic's current instructions) | Lets Claude search boards and fill forms in the browser where you are already signed in |
 | **Google Chrome**, signed in to the job boards you want to use | The skill uses your existing logins and never asks for passwords |
 | **Your resume as a PDF** | Uploaded to forms and read to build your profile |
 | **Python 3.9 or newer** (`python3 --version`) | Runs the duplicate checker and resume helper |
@@ -88,8 +102,11 @@ Say something like **"find me jobs"** or **"run the job-apply-assistant skill"**
    correct it, and asks which boards you are already signed in on. It tells you up front: **sign in to every
    board you pick, in your own Chrome, before the search starts.** The skill never asks for or
    types your passwords, and it skips any board you are signed out of.
-2. **Referral and DM pass?** No (default), A drafts only, B send DMs to your 1st connections,
-   C also send connection requests. Plus whether recruiter emails may be sent or are drafts.
+2. **Referrals (optional).** In plain words: "Do you want help asking people at companies to
+   refer you?" You type 1 (no thanks), 2 (write the messages, you send them), 3 (send them to
+   people you're already connected with on LinkedIn), or 4 (also send connection requests). A
+   second question asks whether recruiter emails are written for you to send (1) or sent for
+   you (2). Not sure? Type "1 and 1".
 3. **Your resume** (and cover letter). It reads the resume and builds `profile.md`.
 4. **The things a resume lacks** (authorization, notice period, pay, relocation, cities).
 5. **Skills you do not have.**
@@ -236,6 +253,8 @@ references/board-profile-update  optional review/update of your profile on each 
 references/signin-check          the skill checks each board's login itself and reports what's missing
 references/{follow-ups,inbox-to-calendar,interview-prep,weekly-review,apify,scheduling}
 scripts/install_missing.sh       installs missing tools from your package manager, only after your yes
+portable/                        chat mode: one prompt for ChatGPT, Gemini or Claude chat, plus setup steps
+AGENTS.md, GEMINI.md             pointers for other coding agents (experimental)
 scripts/doctor.sh                setup check (Python, pandoc, resume path, optional tools)
 scripts/dedupe_check.py          cross-board duplicate check
 scripts/build_resume.sh          markdown -> docx -> pdf (pandoc; Word or LibreOffice)

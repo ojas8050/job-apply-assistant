@@ -67,3 +67,9 @@ do not start; ask the user to sign in first.
 If a board signs the user out mid-run (login wall, "session expired"), stop that board, add it
 to `queue.md` with what happened, continue with the other boards, and include it in the next
 message to the user. Never retry in a loop.
+
+## If you cannot check (no browser tool)
+Do not pretend. Say: "I can't see your browser, so I can't tell which boards you're signed in
+on. Please sign in to the ones you want before you use them." Never treat "yes" as proof that a
+board works, and never write "all boards are signed in". In chat mode there is no sign-in step
+at all, because chat mode does not use boards.

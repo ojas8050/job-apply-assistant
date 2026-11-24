@@ -61,6 +61,30 @@ The user's master resume (and optional cover letter) live wherever they keep the
 the exact paths in `profile.md`. Never modify the master. Never overwrite `profile.md`
 silently - show a diff and confirm.
 
+## Step 0 - Which mode am I in? (do this first, before any question)
+
+Check what tools you actually have:
+- **You can control the user's browser** (a browser tool that drives their own signed-in
+  Chrome) -> **agent mode**. Follow this whole file.
+- **You have no browser tool** (a plain chat) -> **chat mode**. Do not follow the rest of this
+  file. Use `portable/ASSISTANT-PROMPT.md` instead: profile, scoring, tailored resume text,
+  answers, tracker, interview prep. In chat mode never ask about board sign-ins, never offer
+  to send DMs, referral requests or emails, and never say you will search or apply. If the user
+  asks for those, say they need agent mode, and offer drafts.
+Say which mode you chose in one short line. Never mix the two modes.
+
+## How to ask questions (applies to every question in this file)
+
+- **Plain words, numbered choices.** For any choice, give numbers (1, 2, 3) and say which is
+  safest. Avoid jargon and letter codes.
+- **Confirm once.** After an answer, repeat it back as a statement ("I'll run on LinkedIn and
+  Indeed.") and move on. Do not ask "is that right?" again unless the user corrects you.
+- **Unclear answers get the safest option.** If the answer is unclear ("okay", "both", "yes" to a
+  choice question, or two choices at once), do NOT guess the riskier one. Pick the safest option
+  (write only; do not send; do not change), say in one line which one you picked, and ask again
+  with the numbers. "Yes" or "okay" never counts as choosing to send, submit, spend money or
+  change something. Those need a clear number or a clear "send it".
+
 ## Phase 0a - Self-setup (do this yourself, before asking any onboarding question)
 
 Do not make the user set things up. On the first run:
@@ -92,11 +116,11 @@ per topic, short, no jargon:
    ("india" / "global"). Repeat the boards back by name to confirm. The message also tells them plainly: sign in to every chosen board in their own Chrome
    first (the skill never asks for or types passwords; signed-out boards are skipped). Also
    ask which they are already signed in on. Save the answer in `preferences.md` under "Boards".
-2. **Referral and DM pass** (optional, off by default). Ask one question with these
-   choices: **No** / **A. drafts only** / **B. send DMs to my 1st connections** /
-   **C. also send connection requests**; and separately whether emails to recruiters found
-   in hiring posts may be sent or are drafts only. Save the answer in `preferences.md`
-   under "Referrals and DMs" (rules in `references/referrals-and-dms.md`).
+2. **Referrals and LinkedIn messages** (optional, off by default). Ask the plain-English
+   question in `references/referrals-and-dms.md` ("The question to ask"), copied exactly: one
+   number for referrals (1 No, 2 write only, 3 send to my connections, 4 also send connection
+   requests) and one number for recruiter emails (1 write only, 2 send). If unsure or no answer,
+   use No and write-only. Save the answer in `preferences.md` under "Referrals and DMs".
 3. Resume path (and cover letter path if any). Read the resume and extract the profile
    using `references/profile-template.md`.
 4. Things a resume never contains: work authorization per country, notice period,
@@ -119,7 +143,9 @@ Confirm the finished profile with the user before searching. It drives everythin
 
 After the profile is approved, check every chosen board yourself, following
 `references/signin-check.md`: open each board in the user's own Chrome and look for a
-signed-in signal. Do not rely on the user's word alone. Then send ONE message that lists
+signed-in signal. Do not rely on the user's word alone: "yes, I'm signed in" is never proof when you
+can check. If you cannot check (no browser tool), say so plainly ("I can't check this from here;
+please make sure you're signed in") and do not claim the boards are signed in. Then send ONE message that lists
 which boards are signed in, which are not, and which you could not tell, and asks the user to
 sign in to the missing ones in Chrome and come back with "signed in". You re-check only the
 missing boards. Do not start searching a board that is not signed in. Never type or handle
